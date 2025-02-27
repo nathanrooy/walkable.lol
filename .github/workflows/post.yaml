@@ -1,0 +1,24 @@
+name: post
+
+on:
+  schedule:
+    - cron: '0 */3 * * *'
+  workflow_dispatch:
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    env:
+      AWS_BUCK: ${{ secrets.AWS_BUCK }}
+      AWS_REGN: ${{ secrets.AWS_REGN }}
+      AWS_PSWD: ${{ secrets.AWS_PSWD }}
+      AWS_USER: ${{ secrets.AWS_USER }}
+      BSKY_USER: ${{ secrets.BSKY_USER }}
+      BSKY_PSWD: ${{ secrets.BSKY_PSWD }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+      - run: go run main.go
