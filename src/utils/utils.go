@@ -7,8 +7,9 @@ import (
 	"fmt"
 	"image/jpeg"
 	"log"
-	"math/rand"
 	"os"
+	"sort"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
@@ -147,9 +148,13 @@ func CreatePost() Post {
 	// get keys for all image candidates
 	imgKeys := getImagePaths(client)
 
-	// select random image for posting
-	imgKey := imgKeys[rand.Intn(len(imgKeys))]
+	// select image for posting
+	sort.Strings(imgKeys)
+	h := (time.Now().Unix() + 60) / (3600 * 3)
+	idx := h % int64(len(imgKeys))
+	imgKey := imgKeys[idx]
 	log.Printf("> randomly selected image: %s\n", imgKey)
+	log.Println("> debug: h=", h, ",", imgKeys[idx-3:idx+3])
 
 	// download image
 	imgBytes := downloadImage(client, imgKey)
