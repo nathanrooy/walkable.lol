@@ -15,6 +15,10 @@ jobs:
       AWS_USER: ${{ secrets.AWS_USER }}
       BSKY_USER: ${{ secrets.BSKY_USER }}
       BSKY_PSWD: ${{ secrets.BSKY_PSWD }}
+      GOTWI_API_KEY: ${{ secrets.GOTWI_API_KEY }}
+      GOTWI_API_KEY_SECRET: ${{ secrets.GOTWI_API_KEY_SECRET }}
+      TWIT_AS: ${{ secrets.TWIT_AS }}
+      TWIT_AT: ${{ secrets.TWIT_AT }}
 
     steps:
       - uses: actions/checkout@v4
