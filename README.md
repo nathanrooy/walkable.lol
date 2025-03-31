@@ -1,1 +1,1 @@
-# walkable.lol
+<img src="cover.jpg">
